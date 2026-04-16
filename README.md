@@ -1,4 +1,4 @@
-# npm-publish-gha
+# GitHub Actions npm Publish Workflow
 
 Generic GitHub Actions workflow for publishing npm packages with trusted publishing.
 
