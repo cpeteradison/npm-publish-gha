@@ -51,6 +51,10 @@ npm publish ./dist --access public
 
 After the first publish, add the GitHub repository as a trusted publisher on npm and use the GitHub Actions workflow for future releases.
 
+Reference screenshot for the npm trusted publisher setup:
+
+![npm GitHub Actions OIDC setup](./docs/setup-github-actions-oidc.png)
+
 </details>
 
 ## What You Edit Once
