@@ -1,4 +1,4 @@
-name: Publish to npm (Generic)
+name: Publish to npm
 
 run-name: Publish with tag ${{ inputs.dist_tag }}
 
