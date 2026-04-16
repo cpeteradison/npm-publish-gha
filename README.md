@@ -2,8 +2,6 @@
 
 Generic GitHub Actions workflow for publishing npm packages with trusted publishing.
 
-Copy [`./.github/workflows/publish.yml`](./.github/workflows/publish.yml) into your own repository and edit the config values at the top of the file to match your project.
-
 ## Quick Start
 
 1. Copy [`./.github/workflows/publish.yml`](./.github/workflows/publish.yml) into your repo.
