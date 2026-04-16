@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/ultra-tiny-slugify.svg)](https://www.npmjs.com/package/ultra-tiny-slugify)
 [![bundle size](https://img.shields.io/bundlephobia/minzip/ultra-tiny-slugify?color=blue)](https://bundlephobia.com/package/ultra-tiny-slugify)
-[![CI](https://github.com/peteradison/npm-publish-gha/actions/workflows/ci.yml/badge.svg)](https://github.com/peteradison/npm-publish-gha/actions/workflows/ci.yml)
+[![CI](https://github.com/cpeteradison/npm-publish-gha/actions/workflows/ci.yml/badge.svg)](https://github.com/cpeteradison/npm-publish-gha/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
 
 Tiny zero-dependency slugify utility for strings.
