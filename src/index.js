@@ -1,18 +1,17 @@
 const DEFAULT_REPLACEMENT = "-";
 
-function escapeForCharClass(value) {
-  return value.replace(/[-\\\]^]/g, "\\$&");
+function escapeForRegex(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function normalizeReplacement(value) {
-  return typeof value === "string" && value.length > 0 ? value : DEFAULT_REPLACEMENT;
+  return typeof value === "string" ? value : DEFAULT_REPLACEMENT;
 }
 
 export function slugify(input, options = {}) {
   const replacement = normalizeReplacement(options.replacement);
   const preserveCase = options.preserveCase === true;
   const trim = options.trim !== false;
-  const escapedReplacement = escapeForCharClass(replacement);
 
   let value = String(input ?? "")
     .normalize("NFKD")
@@ -24,14 +23,15 @@ export function slugify(input, options = {}) {
 
   value = value
     .replace(/['"]/g, "")
-    .replace(/[^a-zA-Z0-9]+/g, replacement)
-    .replace(new RegExp(`${escapedReplacement}{2,}`, "g"), replacement);
+    .replace(/[^\p{L}\p{N}]+/gu, replacement);
 
-  if (trim) {
-    value = value.replace(
-      new RegExp(`^${escapedReplacement}|${escapedReplacement}$`, "g"),
-      "",
-    );
+  if (replacement.length > 0) {
+    const escaped = escapeForRegex(replacement);
+    value = value.replace(new RegExp(`${escaped}{2,}`, "g"), replacement);
+
+    if (trim) {
+      value = value.replace(new RegExp(`^${escaped}|${escaped}$`, "g"), "");
+    }
   }
 
   return value;

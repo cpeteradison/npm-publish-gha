@@ -10,6 +10,7 @@ const distDir = path.join(rootDir, "dist");
 async function build() {
   await mkdir(distDir, { recursive: true });
   await cp(path.join(sourceDir, "index.js"), path.join(distDir, "index.js"));
+  await cp(path.join(sourceDir, "index.d.ts"), path.join(distDir, "index.d.ts"));
   await cp(path.join(sourceDir, "README.md"), path.join(distDir, "README.md"));
 
   const pkg = JSON.parse(await readFile(path.join(sourceDir, "package.json"), "utf8"));
