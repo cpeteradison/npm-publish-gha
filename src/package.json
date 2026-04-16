@@ -1,6 +1,6 @@
 {
   "name": "ultra-tiny-slugify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tiny zero-dependency slugify utility for strings.",
   "type": "module",
   "main": "./index.js",
@@ -23,11 +23,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/peteradison/npm-publish-gha.git"
+    "url": "git+https://github.com/cpeteradison/npm-publish-gha.git"
   },
-  "homepage": "https://github.com/peteradison/npm-publish-gha#readme",
+  "homepage": "https://github.com/cpeteradison/npm-publish-gha#readme",
   "bugs": {
-    "url": "https://github.com/peteradison/npm-publish-gha/issues"
+    "url": "https://github.com/cpeteradison/npm-publish-gha/issues"
   },
   "publishConfig": {
     "access": "public"
