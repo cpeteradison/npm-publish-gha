@@ -22,16 +22,12 @@ export function slugify(input, options = {}) {
   }
 
   value = value
-    .replace(/['"]/g, "")
+    .replace(/['"'\u2018-\u201F]/gu, "")
     .replace(/[^\p{L}\p{N}]+/gu, replacement);
 
-  if (replacement.length > 0) {
+  if (replacement.length > 0 && trim) {
     const escaped = escapeForRegex(replacement);
-    value = value.replace(new RegExp(`${escaped}{2,}`, "g"), replacement);
-
-    if (trim) {
-      value = value.replace(new RegExp(`^${escaped}|${escaped}$`, "g"), "");
-    }
+    value = value.replace(new RegExp(`^${escaped}|${escaped}$`, "g"), "");
   }
 
   return value;

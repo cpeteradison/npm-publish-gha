@@ -67,6 +67,11 @@ test("handles empty replacement by joining tokens", () => {
   assert.equal(slugify("Hello World", { replacement: "" }), "helloworld");
 });
 
+test("strips smart quotes without creating separators", () => {
+  assert.equal(slugify("it\u2019s alive"), "its-alive");
+  assert.equal(slugify("\u201CHello World\u201D"), "hello-world");
+});
+
 test("null or invalid replacement falls back to default", () => {
   assert.equal(slugify("Hello World", { replacement: null }), "hello-world");
   assert.equal(slugify("Hello World", { replacement: 42 }), "hello-world");
