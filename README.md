@@ -23,6 +23,8 @@ Make sure your project has:
 - GitHub Actions enabled for the repository
 - npm trusted publishing configured for the repository on npm
 
+For the first release, publish the package once with normal npm credentials, then enable trusted publishing for the repository.
+
 Make sure your publish target has:
 
 - a folder to publish from, such as `dist/` or `.`
