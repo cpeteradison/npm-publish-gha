@@ -25,8 +25,10 @@ Make sure your project has:
 
 Make sure your publish target has:
 
-- a folder to publish from, such as `dist/` or `.`
-- a valid `package.json` in that folder, such as `dist/package.json` if you publish from `dist/`
+- a folder to publish from, such as `./dist` or `.`
+- a valid `package.json` in that folder, such as `./dist/package.json` if you publish from `./dist`
+
+Use a relative path like `./dist` (not just `dist`) so npm always treats `PUBLISH_PATH` as a local folder and never as a registry package name.
 
 ## First Release
 
@@ -78,7 +80,7 @@ The workflow checks:
 
 ## Default Config
 
-- `PUBLISH_PATH`: `dist`
+- `PUBLISH_PATH`: `./dist`
 - `PACKAGE_JSON_PATH`: `src/package.json`
 - `NODE_VERSION`: `24`
 - `REGISTRY_URL`: `https://registry.npmjs.org`
