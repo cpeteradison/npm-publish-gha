@@ -4,6 +4,19 @@ Generic GitHub Actions workflow for publishing npm packages with trusted publish
 
 Copy [`./.github/workflows/publish.yml`](./.github/workflows/publish.yml) into your own repository and edit the config values at the top of the file to match your project.
 
+## Quick Start
+
+1. Copy [`./.github/workflows/publish.yml`](./.github/workflows/publish.yml) into your repo.
+2. Edit the `env:` values in the workflow for your project layout.
+3. Run your build locally and confirm the publish folder is correct.
+4. Run the workflow from GitHub Actions.
+
+The manual release form only asks for:
+
+- `dist_tag`
+- `npm_access`
+- `push_git_tag`
+
 ## Before You Use It
 
 Make sure your project has:
@@ -36,19 +49,6 @@ Update the `env:` block near the top of the workflow for your repo:
 - custom `PUBLISH_PATH` and `PACKAGE_JSON_PATH`
 - npm dist-tags such as `latest` and `next`
 - optional git tag creation after publish
-
-## Quick Start
-
-1. Copy [`./.github/workflows/publish.yml`](./.github/workflows/publish.yml) into your repo.
-2. Edit the `env:` values in the workflow for your project layout.
-3. Run your build locally and confirm the publish folder is correct.
-4. Run the workflow from GitHub Actions.
-
-The manual release form only asks for:
-
-- `dist_tag`
-- `npm_access`
-- `push_git_tag`
 
 At release time, the workflow expects:
 
