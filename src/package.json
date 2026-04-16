@@ -1,0 +1,35 @@
+{
+  "name": "slugify-lite",
+  "version": "0.1.0",
+  "description": "Tiny zero-dependency slugify utility for strings.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "keywords": [
+    "slugify",
+    "slug",
+    "string",
+    "utility"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peteradison/npm-publish-gha.git"
+  },
+  "homepage": "https://github.com/peteradison/npm-publish-gha#readme",
+  "bugs": {
+    "url": "https://github.com/peteradison/npm-publish-gha/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

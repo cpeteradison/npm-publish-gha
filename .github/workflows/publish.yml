@@ -1,0 +1,106 @@
+name: Publish to npm (Generic)
+
+run-name: Publish with tag ${{ inputs.dist_tag }}
+
+env:
+  PUBLISH_PATH: "dist"
+  PACKAGE_JSON_PATH: "src/package.json"
+  NODE_VERSION: "24"
+  REGISTRY_URL: "https://registry.npmjs.org"
+  INSTALL_COMMAND: "npm ci"
+  BUILD_COMMAND: "npm run build --if-present"
+  TEST_COMMAND: "npm test"
+  GIT_TAG_PREFIX: "v"
+
+on:
+  workflow_dispatch:
+    inputs:
+      dist_tag:
+        description: "npm dist-tag"
+        required: true
+        default: "latest"
+        type: string
+      npm_access:
+        description: "npm package access"
+        required: true
+        default: "public"
+        type: choice
+        options:
+          - public
+          - restricted
+      push_git_tag:
+        description: "Create and push a git tag after publish"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      DIST_TAG: ${{ inputs.dist_tag }}
+      NPM_ACCESS: ${{ inputs.npm_access }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: ${{ env.REGISTRY_URL }}
+
+      - name: Validate release inputs
+        run: |
+          test -f "$PACKAGE_JSON_PATH" || { echo "::error::Missing package metadata: $PACKAGE_JSON_PATH"; exit 1; }
+
+      - name: Install dependencies
+        if: ${{ env.INSTALL_COMMAND != '' }}
+        run: ${{ env.INSTALL_COMMAND }}
+
+      - name: Build package
+        if: ${{ env.BUILD_COMMAND != '' }}
+        run: ${{ env.BUILD_COMMAND }}
+
+      - name: Run tests
+        if: ${{ env.TEST_COMMAND != '' }}
+        run: ${{ env.TEST_COMMAND }}
+
+      - name: Validate publish target
+        run: |
+          test -d "$PUBLISH_PATH" || { echo "::error::Missing publish directory: $PUBLISH_PATH"; exit 1; }
+          test -f "$PUBLISH_PATH/package.json" || { echo "::error::Missing $PUBLISH_PATH/package.json"; exit 1; }
+
+      - name: Publish to npm
+        run: npm publish "$PUBLISH_PATH" --provenance --access "$NPM_ACCESS" --tag "$DIST_TAG"
+
+      - name: Extract version from package.json
+        id: version
+        run: |
+          VERSION="$(node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync(process.env.PACKAGE_JSON_PATH, 'utf8')); process.stdout.write(pkg.version);")"
+          if [ -z "$VERSION" ]; then
+            echo "::error::No version found in $PACKAGE_JSON_PATH"
+            exit 1
+          fi
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push tag
+        if: ${{ inputs.push_git_tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG_NAME="${GIT_TAG_PREFIX}${{ steps.version.outputs.VERSION }}"
+
+          if git rev-parse -q --verify "refs/tags/$TAG_NAME" >/dev/null; then
+            echo "::error::Git tag $TAG_NAME already exists"
+            exit 1
+          fi
+
+          # This identity is only used for annotated git tag metadata.
+          # npm authentication comes from trusted publishing via OIDC, not these values.
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
+          git push origin "$TAG_NAME"

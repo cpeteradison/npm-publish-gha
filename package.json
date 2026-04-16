@@ -1,0 +1,14 @@
+{
+  "name": "npm-publish-gha",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Example repo for testing npm trusted publishing with GitHub Actions.",
+  "type": "module",
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
