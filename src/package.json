@@ -25,7 +25,7 @@
     "type": "git",
     "url": "git+https://github.com/cpeteradison/npm-publish-gha.git"
   },
-  "homepage": "https://github.com/cpeteradison/npm-publish-gha#readme",
+  "homepage": "https://github.com/cpeteradison/npm-publish-gha/tree/main/src#readme",
   "bugs": {
     "url": "https://github.com/cpeteradison/npm-publish-gha/issues"
   },
