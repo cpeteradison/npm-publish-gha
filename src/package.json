@@ -1,5 +1,5 @@
 {
-  "name": "slugify-lite",
+  "name": "tiny-slug",
   "version": "0.1.0",
   "description": "Tiny zero-dependency slugify utility for strings.",
   "type": "module",
@@ -15,7 +15,10 @@
     "slugify",
     "slug",
     "string",
-    "utility"
+    "utility",
+    "tiny",
+    "text",
+    "url"
   ],
   "license": "MIT",
   "repository": {

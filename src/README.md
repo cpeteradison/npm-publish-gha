@@ -1,17 +1,21 @@
-# slugify-lite
+# tiny-slug
+
+[![npm version](https://img.shields.io/npm/v/tiny-slug.svg)](https://www.npmjs.com/package/tiny-slug)
+[![CI](https://github.com/peteradison/npm-publish-gha/actions/workflows/ci.yml/badge.svg)](https://github.com/peteradison/npm-publish-gha/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
 
 Tiny zero-dependency slugify utility for strings.
 
 ## Install
 
 ```bash
-npm install slugify-lite
+npm install tiny-slug
 ```
 
 ## Usage
 
 ```js
-import { slugify } from "slugify-lite";
+import { slugify } from "tiny-slug";
 
 slugify("Hello World!");
 // "hello-world"

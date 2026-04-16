@@ -11,6 +11,14 @@ test("removes accents and punctuation", () => {
   assert.equal(slugify("Crème brûlée, anyone?"), "creme-brulee-anyone");
 });
 
+test("handles German accented characters", () => {
+  assert.equal(slugify("Frühstück im Büro"), "fruhstuck-im-buro");
+});
+
+test("drops emoji from the slug", () => {
+  assert.equal(slugify("Coffee ☕ time"), "coffee-time");
+});
+
 test("supports a custom replacement character", () => {
   assert.equal(slugify("Hello World", { replacement: "_" }), "hello_world");
 });

@@ -9,11 +9,11 @@ Generic GitHub Actions workflow for publishing npm packages with trusted publish
 3. Run your build locally and confirm the publish folder is correct.
 4. Run the workflow from GitHub Actions.
 
-When you run the workflow manually in GitHub Actions, the form only asks for:
+## Run Inputs
 
-- `dist_tag`
-- `npm_access`
-- `push_git_tag`
+- `dist_tag`: `latest`
+- `npm_access`: `public`
+- `push_git_tag`: `true`
 
 ## Before You Use It
 
@@ -23,12 +23,35 @@ Make sure your project has:
 - GitHub Actions enabled for the repository
 - npm trusted publishing configured for the repository on npm
 
-For the first release, publish the package once with normal npm credentials, then enable trusted publishing for the repository.
-
 Make sure your publish target has:
 
 - a folder to publish from, such as `dist/` or `.`
 - a valid `package.json` in that folder, such as `dist/package.json` if you publish from `dist/`
+
+## First Release
+
+Publish once with normal npm credentials before switching this package to trusted publishing.
+
+<details>
+<summary>Show first-release steps</summary>
+
+Build the package, log in to npm, and publish once with normal credentials:
+
+```bash
+npm run build
+npm login
+npm publish ./dist
+```
+
+If the package is scoped and public, use:
+
+```bash
+npm publish ./dist --access public
+```
+
+After the first publish, add the GitHub repository as a trusted publisher on npm and use the GitHub Actions workflow for future releases.
+
+</details>
 
 ## What You Edit Once
 
@@ -42,14 +65,6 @@ Update the `env:` block near the top of the workflow for your repo:
 - `BUILD_COMMAND`
 - `TEST_COMMAND`
 - `GIT_TAG_PREFIX`
-
-## What You Can Customize
-
-- npm trusted publishing with GitHub OIDC
-- custom `install`, `build`, and `test` commands
-- custom `PUBLISH_PATH` and `PACKAGE_JSON_PATH`
-- npm dist-tags such as `latest` and `next`
-- optional git tag creation after publish
 
 The workflow checks:
 
@@ -70,12 +85,6 @@ The workflow checks:
 
 These defaults assume source metadata in `src/` and publish output in `dist/`.
 
-## Release Inputs
-
-- `dist_tag`: `latest`
-- `npm_access`: `public`
-- `push_git_tag`: `true`
-
 ## Example Layout
 
 ```text
@@ -86,6 +95,7 @@ These defaults assume source metadata in `src/` and publish output in `dist/`.
 │   └── README.md
 ├── dist/
 ├── test/
+├── .github/workflows/ci.yml
 └── .github/workflows/publish.yml
 ```
 
