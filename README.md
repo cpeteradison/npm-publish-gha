@@ -32,7 +32,7 @@ Use a relative path like `./dist` (not just `dist`) so npm always treats `PUBLIS
 
 ## First Release
 
-Publish once with normal npm credentials before switching this package to trusted publishing.
+Publish once with normal npm credentials before switching to trusted publishing.
 
 <details>
 <summary>Show first-release steps</summary>
