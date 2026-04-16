@@ -9,7 +9,7 @@ Generic GitHub Actions workflow for publishing npm packages with trusted publish
 3. Run your build locally and confirm the publish folder is correct.
 4. Run the workflow from GitHub Actions.
 
-The manual release form only asks for:
+When you run the workflow manually in GitHub Actions, the form only asks for:
 
 - `dist_tag`
 - `npm_access`
@@ -19,13 +19,14 @@ The manual release form only asks for:
 
 Make sure your project has:
 
-- a valid npm package
-- GitHub Actions enabled
-- npm trusted publishing configured for the repo on npm
-- a folder to publish from
-- a valid `package.json` in that publish folder
+- an npm package ready to publish
+- GitHub Actions enabled for the repository
+- npm trusted publishing configured for the repository on npm
 
-If you publish from `dist/`, your build must create `dist/package.json`.
+Make sure your publish target has:
+
+- a folder to publish from, such as `dist/` or `.`
+- a valid `package.json` in that folder, such as `dist/package.json` if you publish from `dist/`
 
 ## What You Edit Once
 
@@ -40,7 +41,7 @@ Update the `env:` block near the top of the workflow for your repo:
 - `TEST_COMMAND`
 - `GIT_TAG_PREFIX`
 
-## What The Workflow Supports
+## What You Can Customize
 
 - npm trusted publishing with GitHub OIDC
 - custom `install`, `build`, and `test` commands
@@ -48,7 +49,7 @@ Update the `env:` block near the top of the workflow for your repo:
 - npm dist-tags such as `latest` and `next`
 - optional git tag creation after publish
 
-At release time, the workflow expects:
+The workflow checks:
 
 - `PUBLISH_PATH` exists
 - `PUBLISH_PATH/package.json` exists
@@ -65,7 +66,7 @@ At release time, the workflow expects:
 - `TEST_COMMAND`: `npm test`
 - `GIT_TAG_PREFIX`: `v`
 
-These defaults fit projects that keep source package metadata in `src/` and publish built output from `dist/`.
+These defaults assume source metadata in `src/` and publish output in `dist/`.
 
 ## Release Inputs
 
@@ -86,7 +87,7 @@ These defaults fit projects that keep source package metadata in `src/` and publ
 └── .github/workflows/publish.yml
 ```
 
-This repo includes a small sample package in [`./src/`](./src/). Package-specific docs live in [`./src/README.md`](./src/README.md).
+See [`./src/`](./src/) for the sample package and [`./src/README.md`](./src/README.md) for package usage.
 
 ## License
 
