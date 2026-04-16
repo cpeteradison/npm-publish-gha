@@ -1,5 +1,5 @@
 {
-  "name": "tiny-slug",
+  "name": "ultra-tiny-slugify",
   "version": "0.1.0",
   "description": "Tiny zero-dependency slugify utility for strings.",
   "type": "module",
