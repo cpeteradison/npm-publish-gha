@@ -1,6 +1,6 @@
 # GitHub Actions npm Publish Workflow
 
-Generic GitHub Actions workflow for publishing npm packages with trusted publishing.
+Template GitHub Actions workflow for publishing npm packages with trusted publishing.
 
 ## Quick Start
 
